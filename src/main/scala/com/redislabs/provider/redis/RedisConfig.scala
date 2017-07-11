@@ -31,7 +31,7 @@ case class RedisEndpoint(val host: String = Protocol.DEFAULT_HOST,
     */
   def this(conf: SparkConf) {
       this(
-        conf.get("redis.host", Protocol.DEFAULT_HOST),
+        conf.get("redis.host", sys.env.get("REDIS_HOST").getOrElse(Protocol.DEFAULT_HOST)),
         conf.getInt("redis.port", Protocol.DEFAULT_PORT),
         conf.get("redis.auth", null),
         conf.getInt("redis.db", Protocol.DEFAULT_DATABASE),
